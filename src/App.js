@@ -30,11 +30,12 @@ function App() {
 
           </div>
           <footer className="copyright">
-            <p>&copy;&nbsp;Copyright Hoiyeung Suen - COMP229 - Fall 2023. All rights reserved.</p>
+            <p>&copy;&nbsp;Copyright Hoiyeung Suen COMP229 - Fall 2023. All rights reserved.</p>
           </footer>
         </header>
       </div>
     </Router>
+    
 
   );
 }
