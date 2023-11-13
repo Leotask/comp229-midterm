@@ -5,7 +5,7 @@ function AppointmentBooking() {
     name: '',
     email: '',
     mobile: '',
-    doctor:'',
+    doctor: '',
     date: '',
     time: '',
   });
@@ -27,37 +27,37 @@ function AppointmentBooking() {
     <div>
       <h2>Book an Appointment</h2>
       <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name:</label>
-  <input
-    type="text"
-    id="name"
-    name="name"
-    value={formData.name}
-    onChange={handleChange}
-    placeholder="Enter your name"
-  />
-  <br/>
-  <label htmlFor="email">Email:</label>
-  <input
-    type="text"
-    id="email"
-    name="email"
-    value={formData.email}
-    onChange={handleChange}
-    placeholder="Enter your email"
-  />
-<br/>
-  <label htmlFor="mobile">Mobile:</label>
-  <input
-    type="text"
-    id="mobile"
-    name="mobile"
-    value={formData.mobile}
-    onChange={handleChange}
-    placeholder="Enter your mobile number"
-  />
-<br/>
-<label htmlFor="doctor">Doctor:</label>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter your name"
+        />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+        />
+        <br />
+        <label htmlFor="mobile">Mobile:</label>
+        <input
+          type="text"
+          id="mobile"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
+          placeholder="Enter your mobile number"
+        />
+        <br />
+        <label htmlFor="doctor">Doctor:</label>
         <select
           id="doctor"
           name="doctor"
@@ -79,7 +79,7 @@ function AppointmentBooking() {
           onChange={handleChange}
           required
         />
-<br/>
+        <br />
         <label htmlFor="time">Time:</label>
         <input
           type="time"
@@ -89,7 +89,7 @@ function AppointmentBooking() {
           onChange={handleChange}
           required
         />
-<br/>
+        <br />
         <button type="submit">Submit</button>
       </form>
 
@@ -99,7 +99,7 @@ function AppointmentBooking() {
         </div>
       )}
     </div>
-    
+
   );
 }
 
