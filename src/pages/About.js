@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 export default function About() {
   const initialFormData = {
@@ -9,7 +9,7 @@ export default function About() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [contactList, setContactList] = useState([]);
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,15 +19,14 @@ export default function About() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { name,email,mobile, message } = formData;
-    
-    const newContact = { ...formData };
-    setContactList((prevContacts) => [...prevContacts, newContact]);
 
 
     let alertMessage = `Thank You ${name}! \n${email} \n${mobile} \n${message}
     We will contact you shortly!`;
+    setAlertMessage(`Thank you for your message! ${formData.name}! \nMobile: ${formData.mobile} \nEmail ${formData.email}`);
 
     alert(alertMessage);
+    
     setFormData(initialFormData);
     console.log(formData)
   };
@@ -99,7 +98,15 @@ export default function About() {
         Cancel
       </button>
     </form>
-  </div>
+    <div className="contact-list">
+    {alertMessage && (
+        <div className="alert">
+          <p>{alertMessage}</p>
+        </div>
+      )}
+        </div>
+      </div>
+
 
   );
 }
