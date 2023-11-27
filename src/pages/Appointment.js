@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import handleAppointment from "../handles/handlesubmit"
 function AppointmentBooking() {
   const [formData, setFormData] = useState({
     name: '',
@@ -7,7 +7,7 @@ function AppointmentBooking() {
     mobile: '',
     doctor: '',
     date: '',
-    time: '',
+    time: '10:00', // Default starting time
   });
 
   const [alertMessage, setAlertMessage] = useState('');
@@ -21,13 +21,32 @@ function AppointmentBooking() {
     e.preventDefault();
 
     setAlertMessage(`Appointment booked successfully for ${formData.name} on ${formData.date} at ${formData.time}`);
+    handleAppointment(formData);
   };
+
+  const generateTimeOptions = () => {
+    const startTime = 10 * 60; 
+    const endTime = 14 * 60; 
+    const timeOptions = [];
+
+    for (let time = startTime; time <= endTime; time += 30) {
+      const hours = Math.floor(time / 60);
+      const minutes = (time % 60).toString().padStart(2, '0');
+      const formattedTime = `${hours}:${minutes}`;
+      timeOptions.push(formattedTime);
+    }
+
+    return timeOptions;
+  };
+
+  const timeOptions = generateTimeOptions();
+
 
   return (
     <div>
       <h2>Book an Appointment</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name"></label>
         <input
           type="text"
           id="name"
@@ -35,9 +54,10 @@ function AppointmentBooking() {
           value={formData.name}
           onChange={handleChange}
           placeholder="Enter your name"
+          required
         />
         <br />
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email"></label>
         <input
           type="text"
           id="email"
@@ -45,19 +65,21 @@ function AppointmentBooking() {
           value={formData.email}
           onChange={handleChange}
           placeholder="Enter your email"
+          required
         />
         <br />
-        <label htmlFor="mobile">Mobile:</label>
+        <label htmlFor="mobile"></label>
         <input
           type="text"
           id="mobile"
           name="mobile"
           value={formData.mobile}
           onChange={handleChange}
-          placeholder="Enter your mobile number"
+          placeholder="Enter your phone"
+          required
         />
         <br />
-        <label htmlFor="doctor">Doctor:</label>
+        <label htmlFor="doctor"></label>
         <select
           id="doctor"
           name="doctor"
@@ -70,7 +92,7 @@ function AppointmentBooking() {
           <option value="Dr. Johnson">Dr. Johnson</option>
         </select>
         <br />
-        <label htmlFor="date">Date:</label>
+        <label htmlFor="date"></label>
         <input
           type="date"
           id="date"
@@ -80,15 +102,20 @@ function AppointmentBooking() {
           required
         />
         <br />
-        <label htmlFor="time">Time:</label>
-        <input
-          type="time"
+        <label htmlFor="time"></label>
+        <select
           id="time"
           name="time"
           value={formData.time}
           onChange={handleChange}
           required
-        />
+        >
+          {timeOptions.map((timeOption) => (
+            <option key={timeOption} value={timeOption}>
+              {timeOption}
+            </option>
+          ))}
+        </select>
         <br />
         <button type="submit">Submit</button>
       </form>

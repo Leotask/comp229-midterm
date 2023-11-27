@@ -1,50 +1,50 @@
-// import React from "react";
-// import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
-// function CustomLink({ to, children, ...props }) {
-//     const resolvedPath = useResolvedPath(to)
-//     const isActive = useMatch({ path: resolvedPath.pathname, end: true })
-
-//     return (
-//       <li className={isActive ? "active" : ""}>
-//         <Link to={to} {...props}>
-//           {children}
-//         </Link>
-//       </li>
-//     )
-//   }
-
-// export default function Navbar() {
-//   return (
-//     <nav className="nav">
-//       <Link to="/" className="site-title">
-//         Site Name
-//       </Link>
-//       <ul>
-//         <Link to="/about">About</Link>
-//         <Link to="/appointment">Appointment</Link>
-//         <Link to="/doctorlist">Doctorlist</Link>
-//         <Link to="/">Home</Link>
-//       </ul>
-//     </nav>
-//   )
-// }
-
-import React from 'react';
+import React, {useState, useEffect}from 'react';
 import { Link } from 'react-router-dom';
+import logo from './logo.jpeg';
 
 function Navbar() {
+  const user = JSON.parse(localStorage.getItem('user'))
+  const [isLoggedIn, setIsLoggedIn] = useState(user!=null);
+  const [isDoctor] = useState(user?.email === 'doctor1@gmail.com');
+  const logout = () => {
+    // Clear user information from local storage
+    localStorage.removeItem('user');
+
+    // Update the state to reflect that the user is now logged out
+    setIsLoggedIn(false);
+  };
+  useEffect(() => {
+    // Check if user is not null and set isLoggedIn to true
+    if (user !== null) {
+      setIsLoggedIn(true);
+    }
+  }, [user]);
+  
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
       </Link>
       <ul>
+      <img src={logo} className="App-logo" alt="logo" />
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/appointment">Appointment</Link></li>
+        <li><Link to="/about">About Us</Link></li>
+        {isLoggedIn && !isDoctor &&<li><Link to="/appointment">Appointment</Link></li>}
+        {isDoctor && <li><Link to="/getdata">Appointment</Link></li>}
         <li><Link to="/doctorlist">Doctorlist</Link></li>
-
+        <li><Link to="/contact">Contact</Link></li>
+        <div className="signbutton">
+        {isLoggedIn ? (
+          <li><Link to="/" onClick={logout}>Logout</Link></li>
+        ) : (
+          <li><Link to="/login" onClick={() => setIsLoggedIn(true)}>Sign in</Link></li>
+        )}
+        
+        
+        </div>
       </ul>
+      
+
     </nav>
   );
 }

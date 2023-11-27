@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import handleContact from "../handles/contactsubmit"
 
-export default function About() {
+export default function Contact () {
   const initialFormData = {
     firstName: "",
     lastName: "",
@@ -22,12 +22,15 @@ export default function About() {
     event.preventDefault();
     const { firstName, email, mobile, message } = formData;
 
-
-    let alertMessage = `Thank You ${firstName}! \n${email} \n${mobile} \n${message}`;
  
-    setAlertMessage(`Thank you for your message! ${formData.name}! \nMobile: ${formData.mobile} \nEmail ${formData.email}`);
+    setAlertMessage( <div style={{ fontFamily: 'YourChosenFont', fontSize: '16px' }}>
+    Thank you for your message! {formData.name}! <br />
+    Mobile: {formData.mobile} <br />
+    Email: {formData.email}<br />
+    Message:{formData.message}
+  </div>);
 
-    alert(alertMessage);
+   
 
     setFormData(initialFormData);
     console.log(formData)
@@ -37,22 +40,33 @@ export default function About() {
   const handleCancel = () => {
     setFormData(initialFormData);
   };
-
   return (
-    <div>
-      <div className="text"></div>
-      <p>Healthy Haven is More Than a Health Clinic</p>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11521.605639169804!2d-79.23847616680303!3d43.78528303946077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d0f08cb21bbd%3A0xa70b3f5838a58e58!2s941%20Progress%20Ave%2C%20Scarborough%2C%20ON%20M1G%203T8!5e0!3m2!1sen!2sca!4v1700448179369!5m2!1sen!2sca"
-          width="80%"
-    height="500"
-    allowFullScreen=""
-    aria-hidden="false">
-          </iframe>
-        </div>
-      </div>
-      <div className="container">
+   <div>
+              <div className='info'>
+
+                <p className="mb-2">Address</p>
+                <h5 className="mb-0">941 Progress Avenue, Toronto, Canada</h5>
+              </div>
+     
+        
+          
+              <div className='info'>
+
+                <p className="mb-2">Call Us Now</p>
+                <h5 className="mb-0"> 416-289-5000</h5>
+              </div>
+           
+        
+          
+              <div className='info'>
+       
+                <p className="mb-2">Mail Us Now</p>
+                <h5 className="mb-0">advising@centennialcollege.ca</h5>
+              </div>
+     
+  
+
+          <div className="container">
         <div className="text">
           Contact us Form
         </div>
@@ -135,6 +149,7 @@ export default function About() {
             <button className="submit-btn" type="submit" value="submit">
               Submit
             </button>
+            <br></br>
             <button className="submit-btn" type="button" onClick={handleCancel}>
               Cancel
             </button>
@@ -150,9 +165,12 @@ export default function About() {
         )}
         </div>
     </div>
+
+
     
 
 
 
   );
-}
+
+        }
