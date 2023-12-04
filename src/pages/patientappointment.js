@@ -25,7 +25,7 @@ const AppointmentList = ({ patientEmail }) => {
 
     return (
         <div>
-            <h2>Appointment List</h2>
+            <h2>Your ppointment</h2>
             <table className="appointmentlist">
                 <thead>
                     <tr>
